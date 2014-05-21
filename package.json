@@ -1,20 +1,23 @@
 {
-    "name": "PlanarJS",
-    "version": "0.1.0",
-    "description": "PlanarJS is a general toolkit for manipulating cartesian and polar coordinates in Javascript",
-    "main": "index.js",
-    "scripts": {
-        "test": "tests/spec.js"
-    },
-    "keywords": [
-        "polar",
-        "cartesian",
-        "coordinates",
-        "geometry",
-        "vector",
-        "algebra",
-        "mapping"
-    ],
-    "author": "Omar Kamali <omar.kamali@gmail.com>",
-    "license": "GPL"
+  "name": "PlanarJS",
+  "version": "0.1.0",
+  "description": "PlanarJS is a general toolkit for manipulating cartesian and polar coordinates in Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "tests/spec.js"
+  },
+  "keywords": [
+    "polar",
+    "cartesian",
+    "coordinates",
+    "geometry",
+    "vector",
+    "algebra",
+    "mapping"
+  ],
+  "author": "Omar Kamali <omar.kamali@gmail.com>",
+  "license": "GPL",
+  "dependencies": {
+    "should": "~3.3.1"
+  }
 }
