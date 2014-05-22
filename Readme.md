@@ -8,10 +8,13 @@ It supports the following coordinate systems :
 * Polar ( complete )
 * Geographic ( soon )
 
-TODO :
-=
+### Announcements
+22/05/2014 17:35 - The library is now usable in a CommonJS environment and is fully test-covered. Version bump to 0.2.0 to reflect the actual implementation design and specs. Check test/spec.js for details on how to use it.
+The documentation for a proper use is coming soon !
+
+### TODO :
 
 * Provide events for listening to changes in coordinates
 * Wrap all coordinate systems in one object
-* Implement conversion functions between coordinate systems
+* DONE - Implement conversion functions between coordinate systems
 * Implement facilities for computing distances between points
