@@ -24,8 +24,11 @@ The documentation for a proper use is coming soon !
 
 ### TODO :
 
+* Write a "How to use" paragraph ;D
+* Simplify the API
 * Provide a wrapper for CommonJS and AMD module formats
 * Provide events for listening to changes in coordinates
-* Wrap all coordinate systems in one object
+* Add assertions to ensure the validity of the arguments sent to the API
+* DONE - Wrap all coordinate systems in one object
 * DONE - Implement conversion functions between coordinate systems
-* Implement facilities for computing distances between points
+* DONE - Implement facilities for computing distances between points

@@ -253,4 +253,14 @@ describe('Position', function() {
         pos.r().should.be.within(1 - delta, 1 + delta);
         pos.th().should.be.within((Math.PI / 2) - delta, (Math.PI / 2) + delta);
     });
+    it('should compute the distance between two points', function() {
+        var x = 0;
+        var y = 0;
+        var pointA = cartesian.init(x, y);
+        var pointB = cartesian.init(x + 1, y + 1);
+        var posA = position.init('cartesian', pointA);
+        var posB = position.init('cartesian', pointB);
+        var dist = position.distance(posA, posB);
+        dist.should.be.within(Math.sqrt(2) - delta, Math.sqrt(2) + delta);
+    });
 });
