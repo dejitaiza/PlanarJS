@@ -3,6 +3,10 @@ var should = require("should")
 var cartesian = require("../lib/cartesian")
 var polar = require("../lib/polar")
 var utilities = require("../lib/utilities")
+var position = require("../lib/position")
+
+
+var delta = 0.000000000000001; // Maximum amount of acceptable error of cartesian to polar conversion
 
 describe('Cartesian', function() {
     it('should be loaded correctly', function() {
@@ -35,7 +39,7 @@ describe('Polar', function() {
     it('should be loaded correctly', function() {
         should(polar).not.equal(undefined);
     });
-    it('should store the polar coordinates of a point and reduce theta to [0,2PI]', function() {
+    it('should store the polar coordinates of a point and reduce theta to [-PI,PI]', function() {
         var r = 2;
         var th = 20;
         var point = polar.init(r, th);
@@ -66,6 +70,9 @@ describe('Polar', function() {
 });
 
 describe('Utilities', function() {
+    it('should be loaded correctly', function() {
+        should(utilities).not.equal(undefined);
+    });
     it('should reduce any number to the interval [-PI,PI]', function() {
         utilities.mod2pi(2).should.equal(2);
         utilities.mod2pi(3 * Math.PI).should.equal(Math.PI);
@@ -120,9 +127,7 @@ describe('Utilities', function() {
 
     });
     it('should convert polar coordinates to cartesian', function() {
-        var delta = 0.000000000000001;
         var polarPoint1 = polar.init(0, 0);
-        console.log(polarPoint1);
         var cartPoint1 = utilities.polarToCartesian(polarPoint1);
         cartPoint1.x().should.be.within(0 - delta, 0 + delta);
         cartPoint1.y().should.be.within(0 - delta, 0 + delta);
@@ -166,5 +171,86 @@ describe('Utilities', function() {
         var cartPoint9 = utilities.polarToCartesian(polarPoint9);
         cartPoint9.x().should.be.within(1 - delta, 1 + delta);
         cartPoint9.y().should.be.within(1 - delta, 1 + delta);
+    });
+});
+describe('Position', function() {
+    it('should be loaded correctly', function() {
+        should(position).not.equal(undefined);
+    });
+    it('should return values of the cartesian coordinates used to construct it', function() {
+        var x = 0;
+        var y = 1;
+        var point = cartesian.init(x, y);
+        var pos = position.init('cartesian', point);
+        pos.x().should.equal(0);
+        pos.y().should.equal(1);
+    });
+    it('should convert the cartesian coordinates used to construct it to correct polar coordinates', function() {
+        var x = 0;
+        var y = 1;
+        var point = cartesian.init(x, y);
+        var pos = position.init('cartesian', point);
+        pos.r().should.be.within(1 - delta, 1 + delta);
+        pos.th().should.be.within((Math.PI / 2) - delta, (Math.PI / 2) + delta);
+    });
+    it('should return values of the polar coordinates used to construct it', function() {
+        var r = 1;
+        var th = 0;
+        var point = polar.init(r, th);
+        var pos = position.init('polar', point);
+        pos.r().should.equal(1);
+        pos.th().should.equal(0);
+    });
+    it('should convert the polar coordinates used to construct it to correct cartesian coordinates', function() {
+        var r = 1;
+        var th = 0;
+        var point = polar.init(r, th);
+        var pos = position.init('polar', point);
+        pos.x().should.be.within(1 - delta, 1 + delta);
+        pos.y().should.be.within(0 - delta, 0 + delta);
+    });
+    it('should update the coordinates of a position initialized from cartesian with cartesian values', function() {
+        var x = 2;
+        var y = 2;
+        var point = cartesian.init(x, y);
+        var pos = position.init('cartesian', point);
+        pos.setFromCartesian(0, 1);
+        pos.x().should.equal(0);
+        pos.y().should.equal(1);
+        pos.r().should.be.within(1 - delta, 1 + delta);
+        pos.th().should.be.within((Math.PI / 2) - delta, (Math.PI / 2) + delta);
+    });
+    it('should update the coordinates of a position initialized from polar with polar values', function() {
+        var r = 5;
+        var th = 3;
+        var point = polar.init(r, th);
+        var pos = position.init('polar', point);
+        pos.setFromPolar(1, 0);
+        pos.r().should.equal(1);
+        pos.th().should.equal(0);
+        pos.x().should.be.within(1 - delta, 1 + delta);
+        pos.y().should.be.within(0 - delta, 0 + delta);
+    });
+    it('should update the coordinates of a position initialized from cartesian with polar values', function() {
+        var x = 2;
+        var y = 2;
+        var point = cartesian.init(x, y);
+        var pos = position.init('cartesian', point);
+        pos.setFromPolar(1, 0);
+        pos.r().should.equal(1);
+        pos.th().should.equal(0);
+        pos.x().should.be.within(1 - delta, 1 + delta);
+        pos.y().should.be.within(0 - delta, 0 + delta);
+    });
+    it('should update the coordinates of a position initialized from polar with cartesian values', function() {
+        var r = 5;
+        var th = 3;
+        var point = polar.init(r, th);
+        var pos = position.init('polar', point);
+        pos.setFromCartesian(0, 1);
+        pos.x().should.equal(0);
+        pos.y().should.equal(1);
+        pos.r().should.be.within(1 - delta, 1 + delta);
+        pos.th().should.be.within((Math.PI / 2) - delta, (Math.PI / 2) + delta);
     });
 });
