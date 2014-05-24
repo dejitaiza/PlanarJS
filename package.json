@@ -19,5 +19,8 @@
     "license": "GPL",
     "dependencies": {
         "should": "~3.3.1"
+    },
+    "devDependencies": {
+        "mocha": "~1.19.0"
     }
 }
