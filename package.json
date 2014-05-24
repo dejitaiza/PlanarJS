@@ -4,7 +4,7 @@
     "description": "PlanarJS is a general toolkit for manipulating cartesian and polar coordinates in Javascript",
     "main": "index.js",
     "scripts": {
-        "test": "tests/spec.js"
+        "test": "mocha"
     },
     "keywords": [
         "polar",
