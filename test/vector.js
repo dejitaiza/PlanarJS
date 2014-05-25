@@ -46,7 +46,14 @@ describe('Vector', function() {
     it('should compute a dot product between two vectors', function() {
         var a = vector.init('cartesian', 2, 3);
         var b = vector.init('cartesian', 4, 5);
-        var product = vector.dot(a, b);
+        var product = vector.dotProduct(a, b);
         product.should.equal(23);
+    });
+    it('should compute a scalar product between a scalar and a vector', function() {
+        var s = 5;
+        var a = vector.init('cartesian', 2, 8);
+        var c = vector.scalarProduct(s, a);
+        c.x().should.equal(10);
+        c.y().should.equal(40);
     });
 });
